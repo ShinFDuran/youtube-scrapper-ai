@@ -1,0 +1,27 @@
+{
+  "name": "youtube-channel-extractor",
+  "version": "1.0.0",
+  "description": "Extract video information from YouTube channels using ytdl-core and yt-search",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "extract": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "youtube",
+    "extractor",
+    "videos",
+    "channel",
+    "metadata"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "ytdl-core": "^4.11.5",
+    "yt-search": "^2.10.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
