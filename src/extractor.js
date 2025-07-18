@@ -11,8 +11,6 @@ const { formatDuration } = require('./utils');
 async function extractChannelInfo(channelQuery, maxVideos) {
     try {
         console.log(`🔍 Searching for channel: ${channelQuery}`);
-        
-        // Search for the channel
         const searchResults = await yts(channelQuery);
         
         if (!searchResults.videos || searchResults.videos.length === 0) {
@@ -20,19 +18,15 @@ async function extractChannelInfo(channelQuery, maxVideos) {
             return [];
         }
         
-        console.log(`📺 Found ${searchResults.videos.length} videos, processing first ${maxVideos}...`);
-        
+        console.log(`📺 Found ${searchResults.videos.length} videos, processing first ${maxVideos}...`);        
         const videos = [];
         const videosToProcess = searchResults.videos.slice(0, maxVideos);
         
-        // Process each video with progress indicator
         for (let i = 0; i < videosToProcess.length; i++) {
             const video = videosToProcess[i];
             
             try {
-                console.log(`⏳ Processing video ${i + 1}/${videosToProcess.length}: ${video.title}`);
-                
-                // Get detailed video information
+                console.log(`⏳ Processing video ${i + 1}/${videosToProcess.length}: ${video.title}`);                
                 const info = await ytdl.getBasicInfo(video.url);
                 
                 videos.push({

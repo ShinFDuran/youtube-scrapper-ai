@@ -62,56 +62,6 @@ function displayStats(videos) {
 }
 
 /**
- * Create output directory if it doesn't exist
- * @param {string} dirPath - Directory path to create
- */
-function ensureDirectory(dirPath) {
-    if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true });
-    }
-}
-
-/**
- * Save results to CSV file
- * @param {Array} videos - Array of video objects
- * @param {string} channelName - Channel name for filename
- */
-function saveToCSV(videos, channelName) {
-    const filename = `${channelName.replace(/[^a-zA-Z0-9]/g, '_')}_videos.csv`;
-    
-    try {
-        const headers = ['Title', 'Views', 'Duration', 'Publish Date', 'URL', 'Video ID', 'Channel Name'];
-        const csvContent = [
-            headers.join(','),
-            ...videos.map(video => [
-                `"${video.title.replace(/"/g, '""')}"`,
-                video.views,
-                video.duration,
-                video.publishDate,
-                video.url,
-                video.videoId,
-                `"${video.channelName.replace(/"/g, '""')}"`
-            ].join(','))
-        ].join('\n');
-        
-        fs.writeFileSync(filename, csvContent);
-        console.log(`💾 CSV file saved to: ${filename}`);
-    } catch (error) {
-        console.error('❌ Error saving CSV file:', error.message);
-    }
-}
-
-/**
- * Filter videos by view count threshold
- * @param {Array} videos - Array of video objects
- * @param {number} minViews - Minimum view count
- * @returns {Array} Filtered videos
- */
-function filterByViews(videos, minViews) {
-    return videos.filter(video => video.views >= minViews);
-}
-
-/**
  * Sort videos by specified criteria
  * @param {Array} videos - Array of video objects
  * @param {string} sortBy - Sort criteria ('views', 'duration', 'publishDate')
@@ -153,8 +103,5 @@ module.exports = {
     formatNumber,
     saveToFile,
     displayStats,
-    ensureDirectory,
-    saveToCSV,
-    filterByViews,
     sortVideos
 };
